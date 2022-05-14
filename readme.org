@@ -4,7 +4,7 @@ A simple software configuration system.
 See the docs for more.
 
 * Installation
-: raco pkg install https://github.com/LLazarek/configurable.git
+: raco pkg install https://github.com/LLazarek/configurable
 
 * Docs
 : raco docs configurable
