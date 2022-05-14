@@ -1,0 +1,11 @@
+#+TITLE: configurable
+
+A simple software configuration system.
+See the docs for more.
+
+* Installation
+: raco pkg install https://github.com/LLazarek/configurable.git
+
+* Docs
+: raco docs configurable
+
