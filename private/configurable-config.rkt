@@ -57,7 +57,7 @@
 (define (call-with-configuration configuration-path
                                  thunk)
   (define old-config (current-configuration-path/private))
-  (install-configuration! configuration-path)
-  (begin0 (thunk)
-    (when old-config
-      (install-configuration! old-config))))
+  (dynamic-wind (λ _ (install-configuration! configuration-path))
+                thunk
+                (λ _ (when old-config
+                       (install-configuration! old-config)))))
