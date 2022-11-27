@@ -1,4 +1,4 @@
-#lang configurable/define
+#lang configurable/definition
 
 (define-configurable mutant-sampling
   #:provides [select-mutants all-mutants-should-have-trails?]
