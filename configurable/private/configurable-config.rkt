@@ -19,7 +19,9 @@
                      syntax/location))
 
 (define-for-syntax definitions-require-path-box (box #f))
-(define-simple-macro (config:#%module-begin definitions-require-path body ...)
+(define-simple-macro (config:#%module-begin definitions-require-path
+                                            {~and user-req ((~literal require) . _)} ...
+                                            body ...)
   #:with req (datum->syntax this-syntax (list 'require #'definitions-require-path))
   #:with install! (datum->syntax this-syntax 'install!)
   #:with prov (datum->syntax this-syntax '(provide install!))
@@ -27,6 +29,7 @@
   (#%module-begin
    req
    prov
+   user-req ...
    (define (install!)
      body ...)))
 

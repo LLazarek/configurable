@@ -9,3 +9,9 @@
   (define-implementation use-pre-selected-samples
     #:module "impls/impl2.rkt"
     #:parameters [pre-selected-mutant-samples-db]))
+
+(define-configurable something-else
+  #:provides [n]
+
+  (define-implementation a
+    #:module "impls/a.rkt"))

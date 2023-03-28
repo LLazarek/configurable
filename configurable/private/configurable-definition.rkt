@@ -58,8 +58,11 @@
   #:with [local-parameter ...] (map (λ (p)
                                       (format-id #'name "local:~a" p))
                                     (attribute parameter))
-  (define (name {~? {~@ local-parameter ...}})
-    (local-require path-expr)
-    (config-parameter config-parameter-expr) ...
-    (parameter local-parameter) ...
-    (provided-parameter-id local-id) ...))
+  #:with name-mpi (format-id #'name "mpi:~a" #'name)
+  #:with path (datum->syntax #'here (syntax->datum #'path-expr))
+  (begin
+    (define-runtime-module-path-index name-mpi path)
+    (define (name {~? {~@ local-parameter ...}})
+      ((dynamic-require name-mpi 'config-parameter) config-parameter-expr) ...
+      ((dynamic-require name-mpi 'parameter) local-parameter) ...
+      (provided-parameter-id (dynamic-require name-mpi 'local-id)) ...)))
